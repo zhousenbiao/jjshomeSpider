@@ -4,6 +4,7 @@ from scrapy.http import Request
 from scrapy.spider import Spider
 from scrapy.selector import Selector
 import json
+import re
 from ..items import JjshomeItem
 # 处理编码问题
 import sys
@@ -12,7 +13,7 @@ sys.setdefaultencoding('gb18030')
 
 class jjshomeSpider(Spider):
     name = "EsfSpider"
-    start_urls = ['http://dongguan.jjshome.com/esf/n1c%E5%A4%A7%E5%B2%AD%E5%B1%B1']
+    start_urls = ['http://dongguan.jjshome.com/esf/c%E5%A4%A7%E5%B2%AD%E5%B1%B1']
     dongguanUrl = "http://dongguan.jjshome.com"
     firstPageUrl = ['/esf/n1c%E5%A4%A7%E5%B2%AD%E5%B1%B1']
 
@@ -68,5 +69,8 @@ class jjshomeSpider(Spider):
             item['buildArea'] = buildArea
             item['address'] = address
             item['sumPrice'] = sumPrice
+            ba = re.findall(r'(\w*[0-9]+)\w*', item['buildArea'][0])
+            item['averagePrice']=str(float(item['sumPrice'][0])/float(ba[0]))
+            item['source']=self.dongguanUrl
             # items.append(item)
             yield item

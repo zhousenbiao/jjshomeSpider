@@ -32,7 +32,7 @@ class MySQLStorePipeline(object):
         return item
     #将数据插入数据库的esfInfo表，此表需要事先创建好
     def insert_EsfInfo(self,conn,item):
-            conn.execute("""insert into esfInfo(loupan,houseRoom,buildArea,sumPrice,title,address) values(%s, %s, %s, %s, %s, %s)""", (item['loupan'][0],item['hosuseRoom'][0],item['buildArea'][0],item['sumPrice'][0],item['title'][0],item['address'][0]))
+            conn.execute("""insert into esfInfo(loupan,houseRoom,buildArea,sumPrice,averagePrice,title,address,source) values(%s, %s, %s, %s,%s,%s, %s, %s)""", (item['loupan'][0],item['hosuseRoom'][0],item['buildArea'][0],item['sumPrice'][0],item['averagePrice'],item['title'][0],item['address'][0],item['source']))
 
 
 #以Json的形式存储

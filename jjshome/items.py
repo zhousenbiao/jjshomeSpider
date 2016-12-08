@@ -20,4 +20,8 @@ class JjshomeItem(Item):
     address=Field()
     #总价
     sumPrice=Field()
+    #均价
+    averagePrice=Field()
+    #来源
+    source = Field()
 
